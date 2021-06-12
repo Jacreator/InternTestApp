@@ -26,7 +26,7 @@ class UserController extends Controller
         }
 
         return response()->json(
-            ['success' => true, 'user' => $authUser->toArray()],
+            ['success' => true, 'user' => $authUser],
             200);
     }
 
@@ -77,7 +77,7 @@ class UserController extends Controller
         $user->save();
 
         return response()->json(
-            ['success' => true, 'user' => $user->toArray()],
+            ['success' => true, 'user' => $user],
             201);
     }
 
@@ -93,7 +93,7 @@ class UserController extends Controller
         $user->delete();
 
        return response()->json(
-            ['success' => true, 'user' => $user->toArray()],
+            ['success' => true, 'user' => $user],
             201);
     }
 }
