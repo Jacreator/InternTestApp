@@ -22,6 +22,6 @@ class LoginController extends Controller
     }
 
     public function detial(){
-        return response()->json(['user'=>auth()->user()], 200);
+        return response()->json(['user'=>$token], 200);
     }
 }

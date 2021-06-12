@@ -21,7 +21,8 @@ class RegisterController extends Controller
 //            create a user with the verified details
 			$user = User::create(['name' => $request->name,
 				'email' => $request->email,
-				'password' => bcrypt($request->password)
+				'password' => bcrypt($request->password),
+				'verification_token' => User::generateVerificationCode()
 			]);
 
 //            create user access token

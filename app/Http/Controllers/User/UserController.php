@@ -17,16 +17,16 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json($user);
         $authUser = auth()->user();
-        if ($authUser != $user) {
+
+        if (is_null($authUser)) {
             return response()->json(
                 ['success' => false, 'message' => 'No user found'],
                 400);
         }
 
         return response()->json(
-            ['success' => true, 'user' => $user->toArray()],
+            ['success' => true, 'user' => $authUser->toArray()],
             200);
     }
 
@@ -39,6 +39,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $user = Auth()->user();
         // set rules
         $rules = [
             'email' => 'email|unique:users,email,' . $user->id,
@@ -88,6 +89,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user = Auth()->user();
+        $user->delete();
+
+       return response()->json(
+            ['success' => true, 'user' => $user->toArray()],
+            201);
     }
 }
